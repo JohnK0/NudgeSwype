@@ -77,6 +77,36 @@ class AddReminder : AppCompatActivity() {
         * Fin
         */
 
+        /*
+        * Set snooze time for Reminder
+        * Beginning
+        */
+        // Hour spinner
+        // Create an ArrayAdapter
+        val hour_snooze_adapter = ArrayAdapter.createFromResource(
+            this,
+            R.array.hour_times, android.R.layout.simple_spinner_item
+        )
+        // Specify the layout to use when the list of choices appears
+        hour_snooze_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        // Apply the adapter to the spinner
+        hour_snooze_spinner.adapter = hour_snooze_adapter
+
+        //Minute spinner
+        // Create an ArrayAdapter
+        val minute_snooze_adapter = ArrayAdapter.createFromResource(
+            this,
+            R.array.minute_times, android.R.layout.simple_spinner_item
+        )
+        // Specify the layout to use when the list of choices appears
+        minute_snooze_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        // Apply the adapter to the spinner
+        minute_snooze_spinner.adapter = minute_snooze_adapter
+        /*
+        * Set snooze time for Reminder
+        * Fin
+        */
+
     }
 
     fun getValues(view: View) {
