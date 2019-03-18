@@ -24,6 +24,11 @@ class AddReminder : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_reminder)
 
+
+        /*
+        * Set time for Reminder
+        * Beginning
+        */
         // Hour spinner
         // Create an ArrayAdapter
         val hour_adapter = ArrayAdapter.createFromResource(
@@ -56,6 +61,21 @@ class AddReminder : AppCompatActivity() {
         period_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         // Apply the adapter to the spinner
         period_spinner.adapter = period_adapter
+
+        /*
+        * Set time for Reminder
+        * Fin
+        */
+
+        /*
+        * Create name for Reminder
+        * Beginning
+        */
+
+        /*
+        * Create name for Reminder
+        * Fin
+        */
 
     }
 
