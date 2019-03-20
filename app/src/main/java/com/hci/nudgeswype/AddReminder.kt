@@ -24,7 +24,6 @@ class AddReminder : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_reminder)
 
-
         /*
         * Set time for Reminder
         * Beginning
@@ -106,6 +105,16 @@ class AddReminder : AppCompatActivity() {
         * Set snooze time for Reminder
         * Fin
         */
+
+        button_create.setOnClickListener{
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
+        button_cancel.setOnClickListener{
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 

@@ -17,11 +17,21 @@
             android:layout_alignParentBottom="true" android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"/>
 
+    <Button
+            android:text="Cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="52dp" android:id="@+id/button_cancel" android:layout_alignParentBottom="true"
+            android:layout_marginBottom="15dp" android:layout_alignParentStart="true" android:layout_marginLeft="15dp"
+            android:layout_marginStart="25dp" android:layout_alignParentLeft="true"
+            android:layout_toStartOf="@+id/button_create" android:layout_marginRight="186dp"
+            android:layout_marginEnd="186dp" android:layout_toLeftOf="@+id/button_create"
+            android:background="@color/colorPrimary" android:textColorLink="#FFFFFF" android:textColor="#FFFFFF"/>
+
     <Spinner
             android:id="@+id/hour_spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp" android:layout_marginBottom="10dp" android:layout_alignParentStart="true"
+            android:layout_marginTop="5dp" android:layout_marginBottom="0dp" android:layout_alignParentStart="true"
             android:layout_marginLeft="15dp" android:layout_marginStart="10dp" android:layout_alignParentLeft="true"
             android:layout_alignParentEnd="true" android:layout_alignParentRight="true"
             android:layout_marginRight="4dp"
@@ -32,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/hour_spinner"
-            android:layout_alignParentStart="true" android:layout_marginTop="0dp" android:layout_marginBottom="10dp"
+            android:layout_alignParentStart="true" android:layout_marginTop="0dp" android:layout_marginBottom="0dp"
             android:layout_marginLeft="11dp" android:layout_marginStart="10dp" android:layout_alignParentLeft="true"
             android:layout_marginRight="8dp" android:layout_marginEnd="10dp" android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"/>
@@ -42,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/minute_spinner"
-            android:layout_marginTop="0dp" android:layout_marginBottom="10dp" android:layout_alignParentStart="true"
+            android:layout_marginTop="0dp" android:layout_marginBottom="0dp" android:layout_alignParentStart="true"
             android:layout_marginLeft="11dp" android:layout_marginStart="10dp" android:layout_alignParentLeft="true"
             android:layout_alignParentEnd="true" android:layout_alignParentRight="true"
             android:layout_marginRight="8dp"
@@ -111,14 +121,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:id="@+id/hour_snooze_spinner" android:layout_marginTop="13dp"
             android:layout_below="@+id/reminder2" android:layout_alignParentStart="true" android:layout_marginLeft="0dp"
-            android:layout_marginStart="0dp" android:layout_alignParentLeft="true" android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true" android:layout_marginRight="0dp" android:layout_marginEnd="0dp"/>
+            android:layout_marginStart="10dp" android:layout_alignParentLeft="true" android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true" android:layout_marginRight="0dp" android:layout_marginEnd="10dp"/>
     <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:id="@+id/minute_snooze_spinner" android:layout_marginTop="0dp"
             android:layout_below="@+id/hour_snooze_spinner" android:layout_alignParentStart="true"
             android:layout_marginLeft="0dp"
-            android:layout_marginStart="0dp" android:layout_alignParentLeft="true" android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true" android:layout_marginRight="0dp" android:layout_marginEnd="0dp"/>
+            android:layout_marginStart="10dp" android:layout_alignParentLeft="true" android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true" android:layout_marginRight="0dp" android:layout_marginEnd="10dp"/>
 
 </RelativeLayout>
