@@ -16,7 +16,7 @@ class reminderFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.reminder,container,false)
         daysOfTheWeek = booleanArrayOf(false,false,false,false,false,false,false)
-        val onSwitch =  view.findViewById<Switch>(R.id.toggleSwitch)
+/*        val onSwitch =  view.findViewById<Switch>(R.id.toggleSwitch)
         onSwitch.setOnCheckedChangeListener({ _, isChecked ->
             if (isChecked) {
                 view.setBackgroundColor(Color.rgb(51, 181, 229))
@@ -24,7 +24,7 @@ class reminderFragment : Fragment() {
 
                 view.setBackgroundColor(Color.LTGRAY)
             }
-        })
+        })*/
         return view
     }
 
