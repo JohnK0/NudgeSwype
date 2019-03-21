@@ -1,12 +1,10 @@
 package com.hci.nudgeswype
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.View
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Spinner
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_add_reminder.*
 
@@ -106,6 +104,10 @@ class AddReminder : AppCompatActivity() {
         * Fin
         */
 
+        // create new reminderTime picker
+
+      // reminderTime().show(supportFragmentManager,"reminderTimePicker");
+
         button_create.setOnClickListener{
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
@@ -115,6 +117,7 @@ class AddReminder : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+
 
     }
 

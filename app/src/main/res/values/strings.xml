@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">NudgeSwype</string>
+    <string name="thursday">R</string>
+    <string name="wednesday">W</string>
+    <string name="monday">M</string>
+    <string name="tuesday">T</string>
+    <string name="Saturday">S</string>
+    <string name="Friday">F</string>
+    <string name="Sunday">S</string>
+    <string name="reminderText">Reminder</string>
 
     <string-array name="hour_times">
         <item>1</item>
