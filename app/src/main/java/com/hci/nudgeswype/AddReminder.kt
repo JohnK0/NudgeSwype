@@ -23,7 +23,7 @@ class AddReminder : AppCompatActivity() {
         setContentView(R.layout.activity_add_reminder)
 
 
-
+        /*
         /*
         * Set time for Reminder
         * Beginning
@@ -107,7 +107,7 @@ class AddReminder : AppCompatActivity() {
         */
 
         // create new reminderTime picker
-
+        */
       // reminderTime().show(supportFragmentManager,"reminderTimePicker");
 
         button_create.setOnClickListener{
@@ -124,10 +124,10 @@ class AddReminder : AppCompatActivity() {
     }
 
     fun getValues(view: View) {
-        Toast.makeText(
-            this, "hour spinner  " + hour_spinner.selectedItem.toString() +
-                    "\nminute spinner " + minute_spinner.selectedItem.toString() + "\nperiod spinner " +
-                    period_spinner.selectedItem.toString(), Toast.LENGTH_LONG
-        ).show()
+//        Toast.makeText(
+//            this, "hour spinner  " + hour_spinner.selectedItem.toString() +
+//                    "\nminute spinner " + minute_spinner.selectedItem.toString() + "\nperiod spinner " +
+//                    period_spinner.selectedItem.toString(), Toast.LENGTH_LONG
+//        ).show()
     }
 }
