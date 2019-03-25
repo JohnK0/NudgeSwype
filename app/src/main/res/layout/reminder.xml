@@ -3,79 +3,36 @@
                                              xmlns:app="http://schemas.android.com/apk/res-auto"
                                              xmlns:tools="http://schemas.android.com/tools"
                                              android:layout_width="match_parent"
-                                             android:layout_height="match_parent" android:background="#D3B088">
+                                             android:layout_height="wrap_content" android:background="#D3B088">
 
     <TextView
-            android:text="@string/reminderText"
-            android:layout_width="71dp"
-            android:layout_height="35dp"
+            android:text="@string/reminder_name"
+            android:layout_width="100dp"
+            android:layout_height="26dp"
             android:id="@+id/reminderName" android:gravity="center"
             android:textColor="@android:color/black" android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/sunday" app:layout_constraintBottom_toTopOf="@+id/sunday"
-            app:layout_constraintTop_toTopOf="@+id/sunday" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="16dp" android:layout_marginStart="16dp" android:layout_marginEnd="15dp"
-            android:layout_marginRight="15dp"/>
+            app:layout_constraintEnd_toStartOf="@+id/reminderTime" app:layout_constraintBottom_toTopOf="@+id/reminderTime"
+            app:layout_constraintTop_toTopOf="@+id/reminderTime" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp" app:layout_constraintHorizontal_bias="0.12"
+            android:layout_marginLeft="1dp" android:layout_marginStart="1dp"/>
     <TextView
-            android:text="@string/monday"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/monday" android:gravity="center"
-            app:layout_constraintBaseline_toBaselineOf="@+id/tuesday" app:layout_constraintStart_toEndOf="@+id/sunday"
-            app:layout_constraintEnd_toStartOf="@+id/tuesday" android:layout_marginEnd="12dp"
+            android:text="@string/reminder_snooze"
+            android:layout_width="58dp"
+            android:layout_height="23dp"
+            android:id="@+id/reminderSnooze" android:gravity="center"
+            app:layout_constraintBaseline_toBaselineOf="@+id/toggleSwitch"
+            app:layout_constraintStart_toEndOf="@+id/reminderTime"
+            app:layout_constraintEnd_toStartOf="@+id/toggleSwitch" android:layout_marginEnd="12dp"
             android:layout_marginRight="12dp" android:textColor="@color/daysOfTheWeekOff"/>
     <TextView
-            android:text="@string/Sunday"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/sunday" android:gravity="center"
-            app:layout_constraintBaseline_toBaselineOf="@+id/monday"
-            app:layout_constraintStart_toEndOf="@+id/reminderName" app:layout_constraintEnd_toStartOf="@+id/monday"
+            android:text="@string/reminder_time"
+            android:layout_width="77dp"
+            android:layout_height="23dp"
+            android:id="@+id/reminderTime" android:gravity="center"
+            app:layout_constraintBaseline_toBaselineOf="@+id/reminderSnooze"
+            app:layout_constraintStart_toEndOf="@+id/reminderName" app:layout_constraintEnd_toStartOf="@+id/reminderSnooze"
             android:layout_marginEnd="16dp" android:layout_marginRight="16dp"
-            android:textColor="@color/daysOfTheWeekOff"/>
-    <TextView
-            android:text="@string/tuesday"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tuesday" android:gravity="center"
-            app:layout_constraintStart_toEndOf="@+id/monday" app:layout_constraintEnd_toStartOf="@+id/wednesday"
-            app:layout_constraintTop_toTopOf="@+id/friday" app:layout_constraintBottom_toBottomOf="@+id/friday"
-            android:layout_marginEnd="14dp" android:layout_marginRight="14dp"
-            android:textColor="@color/daysOfTheWeekOff"/>
-    <TextView
-            android:text="@string/wednesday"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/wednesday" android:gravity="center"
-            app:layout_constraintBaseline_toBaselineOf="@+id/tuesday" app:layout_constraintStart_toEndOf="@+id/tuesday"
-            app:layout_constraintEnd_toStartOf="@+id/thursday" android:layout_marginEnd="15dp"
-            android:layout_marginRight="15dp" android:textColor="@color/daysOfTheWeekOff"/>
-    <TextView
-            android:text="@string/thursday"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/thursday" android:gravity="center"
-            app:layout_constraintBaseline_toBaselineOf="@+id/wednesday"
-            app:layout_constraintStart_toEndOf="@+id/wednesday" app:layout_constraintEnd_toStartOf="@+id/friday"
-            android:layout_marginEnd="15dp" android:layout_marginRight="15dp"
-            android:textColor="@color/daysOfTheWeekOff"/>
-    <TextView
-            android:text="@string/Friday"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/friday" android:gravity="center"
-            app:layout_constraintBaseline_toBaselineOf="@+id/saturday"
-            app:layout_constraintStart_toEndOf="@+id/thursday" app:layout_constraintEnd_toStartOf="@+id/saturday"
-            android:layout_marginEnd="14dp" android:layout_marginRight="14dp"
-            android:textColor="@color/daysOfTheWeekOff"/>
-    <TextView
-            android:text="@string/Saturday"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/saturday" android:gravity="center"
-            app:layout_constraintStart_toEndOf="@+id/friday" app:layout_constraintEnd_toStartOf="@+id/toggleSwitch"
-            app:layout_constraintTop_toTopOf="@+id/toggleSwitch"
-            app:layout_constraintBottom_toBottomOf="@+id/toggleSwitch"
-            android:layout_marginEnd="22dp" android:layout_marginRight="22dp"
             android:textColor="@color/daysOfTheWeekOff"/>
 
 
@@ -84,8 +41,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/toggleSwitch" android:layout_marginTop="25dp"
             android:theme="@style/SwitchTheme"
-            app:layout_constraintStart_toEndOf="@+id/saturday" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" android:layout_marginEnd="6dp" android:layout_marginRight="6dp"/>
+            app:layout_constraintStart_toEndOf="@+id/reminderSnooze" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginEnd="6dp" android:layout_marginRight="6dp"
+            app:layout_constraintHorizontal_bias="0.92"/>
 
 
 </android.support.constraint.ConstraintLayout>

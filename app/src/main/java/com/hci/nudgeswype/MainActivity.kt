@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : SingleFragmentActivity() {
+    override fun createFragment() = MainFragment.newInstance()
+
     var str = "0"
     val fragManager = supportFragmentManager
     val fragTransaction = fragManager.beginTransaction()
@@ -23,6 +25,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
 
     override fun onResume() {
         super.onResume()

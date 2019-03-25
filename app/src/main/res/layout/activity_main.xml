@@ -5,6 +5,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/fragment_container"
         tools:context=".MainActivity">
     <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"
@@ -14,8 +15,5 @@
             android:layout_marginBottom="15dp" android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true" android:layout_marginRight="15dp" android:layout_marginEnd="18dp"
             app:backgroundTint="@color/colorPrimary"/>
-    <fragment
-            android:layout_width="match_parent"
-            android:layout_height="65dp" android:name="com.hci.nudgeswype.reminderFragment"
-            android:id="@+id/fragment"/>
+
 </RelativeLayout>
