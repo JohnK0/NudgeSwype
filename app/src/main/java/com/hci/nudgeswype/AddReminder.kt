@@ -22,6 +22,8 @@ class AddReminder : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_reminder)
 
+
+
         /*
         * Set time for Reminder
         * Beginning
