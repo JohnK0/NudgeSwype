@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.NumberPicker
 import android.widget.Toast
+import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.activity_add_reminder.*
 
 class AddReminder : AppCompatActivity() {
@@ -21,6 +23,12 @@ class AddReminder : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_reminder)
+        val np: NumberPicker = findViewById(R.id.numPicker)
+
+        np.setMinValue(0)
+        np.setMaxValue(59)
+        np.setWrapSelectorWheel(true)
+
 
 
         /*
