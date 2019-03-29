@@ -139,19 +139,48 @@
             android:layout_marginRight="0dp" android:layout_marginEnd="0dp"
             android:layout_alignParentStart="true" android:layout_marginLeft="0dp"
             android:layout_marginStart="0dp" android:layout_alignParentLeft="true"
-            android:layout_marginTop="0dp" android:layout_below="@+id/textView"/>
+            android:layout_marginTop="0dp" android:layout_below="@+id/reminder_time"/>
     <TextView
-            android:text="Reminder"
+            android:text="Time"
             android:layout_width="410dp"
-            android:layout_height="25dp" android:id="@+id/textView" android:layout_alignParentEnd="true"
+            android:layout_height="25dp" android:id="@+id/reminder_time" android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true" android:layout_marginRight="0dp" android:layout_marginEnd="0dp"
             android:layout_alignParentStart="true" android:layout_marginLeft="1dp" android:layout_marginStart="1dp"
-            android:layout_alignParentLeft="true" android:layout_marginTop="0dp" android:layout_alignParentTop="true"
-            android:gravity="center" android:textSize="18sp"/>
+            android:layout_alignParentLeft="true" android:layout_marginTop="0dp"
+            android:gravity="center" android:textSize="18sp" android:layout_below="@+id/editText"/>
+    <TextView
+            android:text="Snooze"
+            android:layout_width="410dp"
+            android:layout_height="25dp" android:id="@+id/reminder_snooze" android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true" android:layout_marginRight="1dp" android:layout_marginEnd="1dp"
+            android:layout_alignParentStart="true" android:layout_marginLeft="0dp" android:layout_marginStart="0dp"
+            android:layout_alignParentLeft="true" android:layout_marginTop="0dp"
+            android:gravity="center" android:textSize="18sp" android:layout_below="@+id/timePicker1"/>
     <NumberPicker
             android:id="@+id/numPicker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="0dp" android:layout_below="@+id/timePicker1"/>
+            android:layout_marginTop="0dp" android:layout_below="@+id/reminder_snooze"
+            android:layout_alignParentStart="true" android:layout_alignParentLeft="true"/>
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text="Name"
+            android:ems="10"
+            android:layout_alignParentStart="true" android:layout_marginStart="0dp"
+            android:layout_alignParentLeft="true" android:id="@+id/editText"
+            android:layout_marginTop="0dp" android:layout_marginLeft="0dp" android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true" android:layout_marginRight="0dp" android:layout_marginEnd="0dp"
+            android:layout_below="@+id/reminder_name" android:gravity="center"/>
+    <TextView
+            android:text="Reminder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_alignParentStart="true"
+            android:layout_marginStart="0dp" android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true" android:id="@+id/reminder_name" android:layout_marginTop="0dp"
+            android:layout_marginLeft="0dp" android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true" android:layout_marginRight="0dp" android:layout_marginEnd="0dp"
+            android:textSize="18sp" android:gravity="center"/>
 
 </RelativeLayout>
