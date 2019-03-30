@@ -12,16 +12,23 @@ data class reminder_object(val reminder_time: String, val snooze_time: String, v
 
 class MainFragment : Fragment() {
 
-    private val reminders = ArrayList<reminder_object>(0)
+    private var reminders = ArrayList<reminder_object>(0)
     //reminders.add(reminder_object("4:30 AM", "0:40", "homework 1"))
     //   reminder_object("5:30 AM", "0:45", "homework 2"),
      //  reminder_object("6:30 AM", "0:50", "homework 3")
 
 
+    fun getReminderList(): ArrayList<reminder_object> {
+        return reminders
+    }
+
+    fun addToReminderList(reminder_object: reminder_object) {
+        reminders.add(reminder_object)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        reminders.add(reminder_object("4:30 AM", "0:40", "homework 1"))
         reminders.add(reminder_object("5:30 AM", "0:45", "homework 2"))
+        reminders.add(reminder_object("4:30 AM", "0:40", "homework 1"))
         reminders.add(reminder_object("6:30 AM", "0:50", "homework 3"))
         super.onCreate(savedInstanceState)
         retainInstance = true

@@ -3,10 +3,9 @@ package com.hci.nudgeswype
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.NumberPicker
-import android.widget.Toast
+import android.widget.*
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.activity_add_reminder.*
 
@@ -120,6 +119,10 @@ class AddReminder : AppCompatActivity() {
 
         button_create.setOnClickListener{
             val intent = Intent(this, MainActivity::class.java)
+
+            MainFragment.newInstance().addToReminderList(reminder_object(getReminderTime(), getSnoozeTime(), getReminderName()))
+
+//            Log.i("reminderInfo", getReminderTime() + " " + getSnoozeTime() + " " + getReminderName())
             startActivity(intent)
         }
 
@@ -129,6 +132,43 @@ class AddReminder : AppCompatActivity() {
         }
 
 
+    }
+
+    fun convertMinuteToString(minute: Int): String {
+        if (minute < 10)
+            return "0" + minute.toString()
+        return minute.toString()
+
+    }
+    fun getReminderTime(): String {
+        val timePicker: TimePicker = findViewById(R.id.timePicker)
+        var (reminderHour, reminderMinute) = Pair(timePicker.getHour(), timePicker.getMinute())
+
+        var period = "AM"
+        if (reminderHour > 11) {
+            period = "PM"
+            if (reminderHour != 12)
+                reminderHour = reminderHour - 12
+        }
+
+        val reminderTime = reminderHour.toString() + ":" + convertMinuteToString(reminderMinute) + " " + period
+
+        return reminderTime
+
+    }
+
+    fun getSnoozeTime(): String {
+        val snoozePicker: NumberPicker = findViewById(R.id.numPicker)
+        val snoozeTime = snoozePicker.getValue()
+
+        return "0:" + convertMinuteToString(snoozeTime)
+    }
+
+    fun getReminderName(): String {
+        val ReminderTextView: TextView = findViewById(R.id.reminderName)
+        val reminderName = ReminderTextView.getText().toString()
+
+        return reminderName
     }
 
     fun getValues(view: View) {
