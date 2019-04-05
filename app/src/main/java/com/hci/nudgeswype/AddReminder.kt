@@ -5,9 +5,15 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
-import android.widget.*
-import kotlinx.android.synthetic.*
+import android.widget.NumberPicker
+import android.widget.TextView
+import android.widget.TimePicker
 import kotlinx.android.synthetic.main.activity_add_reminder.*
+import org.json.JSONObject
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.io.IOException
 
 class AddReminder : AppCompatActivity() {
 
@@ -119,8 +125,10 @@ class AddReminder : AppCompatActivity() {
 
         button_create.setOnClickListener{
             val intent = Intent(this, MainActivity::class.java)
-
-            MainFragment.newInstance().addToReminderList(reminder_object(getReminderTime(), getSnoozeTime(), getReminderName()))
+            //var info_to_send = Bundle()
+            addReminderJSON(getReminderTime(), getSnoozeTime(), getReminderName())
+            //info_to_send.putStringArrayList("reminderInfo",listToSend)
+           // MainFragment.newInstance().addToReminderList(reminder_object(getReminderTime(), getSnoozeTime(), getReminderName()))
 
 //            Log.i("reminderInfo", getReminderTime() + " " + getSnoozeTime() + " " + getReminderName())
             startActivity(intent)
@@ -177,5 +185,46 @@ class AddReminder : AppCompatActivity() {
 //                    "\nminute spinner " + minute_spinner.selectedItem.toString() + "\nperiod spinner " +
 //                    period_spinner.selectedItem.toString(), Toast.LENGTH_LONG
 //        ).show()
+    }
+
+    fun loadJSONFromAsset(): String? {
+        var json: String? = null
+        try {
+            val `is` = FileInputStream( applicationContext.filesDir.path + File.separator + "reminders.json") //context!!.openFileInput("reminders.json")
+            val size = `is`.available()
+            val buffer = ByteArray(size)
+            `is`.read(buffer)
+            `is`.close()
+            json = buffer.toString(Charsets.UTF_8)
+        } catch (ex: IOException) {
+            ex.printStackTrace()
+            return null
+        }
+
+        return json
+    }
+
+    fun addReminderJSON(reminder_time: String, snooze_time: String, name: String) {
+        val fullJSON = JSONObject(loadJSONFromAsset())
+        val totalReminders = fullJSON.getJSONObject("reminders")
+        val numReminders = totalReminders.length()
+        var newReminder = JSONObject();
+        newReminder.put("reminder_time",reminder_time)
+        newReminder.put("snooze_time",snooze_time)
+        newReminder.put("reminder_name",name)
+
+        totalReminders.put((numReminders + 1).toString(),newReminder)
+
+        val newJsonText = "{ \"reminders\":" + totalReminders.toString() + "}"
+        Log.i("newjson",newJsonText)
+
+        try {
+            val `is` = FileOutputStream( applicationContext.filesDir.path + File.separator + "reminders.json")
+            `is`.write(newJsonText.toByteArray())
+            `is`.close()
+        } catch (ex: IOException) {
+            ex.printStackTrace()
+
+        }
     }
 }
