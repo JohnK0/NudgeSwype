@@ -1,9 +1,9 @@
 package com.hci.nudgeswype
 
-import android.graphics.Movie
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Switch
 import android.widget.TextView
 
 class ListAdapter(private val list: List<reminder_object>)
@@ -28,18 +28,21 @@ class ReminderViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     private var reminderNameView: TextView? = null
     private var reminderTimeView: TextView? = null
     private var reminderSnoozeView: TextView? = null
+    private var reminderSwitch: Switch? = null
 
 
     init {
         reminderNameView = itemView.findViewById(R.id.reminderName)
         reminderTimeView = itemView.findViewById(R.id.reminderTime)
         reminderSnoozeView = itemView.findViewById(R.id.reminderSnooze)
+        reminderSwitch = itemView.findViewById(R.id.reminderSwitch)
     }
 
     fun bind(reminder: reminder_object) {
         reminderNameView?.text = reminder.name
         reminderTimeView?.text = reminder.reminder_time
         reminderSnoozeView?.text = reminder.snooze_time
+        reminderSwitch?.setChecked(reminder.isChecked)
     }
 
 }

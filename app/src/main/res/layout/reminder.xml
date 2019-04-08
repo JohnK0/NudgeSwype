@@ -21,9 +21,9 @@
             android:layout_width="58dp"
             android:layout_height="23dp"
             android:id="@+id/reminderSnooze" android:gravity="center"
-            app:layout_constraintBaseline_toBaselineOf="@+id/toggleSwitch"
+            app:layout_constraintBaseline_toBaselineOf="@+id/reminderSwitch"
             app:layout_constraintStart_toEndOf="@+id/reminderTime"
-            app:layout_constraintEnd_toStartOf="@+id/toggleSwitch" android:layout_marginEnd="12dp"
+            app:layout_constraintEnd_toStartOf="@+id/reminderSwitch" android:layout_marginEnd="12dp"
             android:layout_marginRight="12dp" android:textColor="@color/daysOfTheWeekOff"/>
     <TextView
             android:text="@string/reminder_time"
@@ -39,7 +39,7 @@
     <Switch
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/toggleSwitch" android:layout_marginTop="25dp"
+            android:id="@+id/reminderSwitch" android:layout_marginTop="25dp"
             android:theme="@style/SwitchTheme"
             app:layout_constraintStart_toEndOf="@+id/reminderSnooze" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" android:layout_marginEnd="6dp" android:layout_marginRight="6dp"

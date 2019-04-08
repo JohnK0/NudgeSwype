@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.recycler_view_frag.*
 import org.json.JSONObject
 import java.io.IOException
 
-data class reminder_object(val reminder_time: String, val snooze_time: String, val name: String)
+data class reminder_object(val reminder_time: String, val snooze_time: String, val name: String, val isChecked: Boolean )
 
 class MainFragment : Fragment() {
 
@@ -82,7 +82,7 @@ class MainFragment : Fragment() {
         for (i in 0 until length) {
             val currentReminder = totalReminders.getJSONObject((i+1).toString())
             reminders.add(reminder_object(currentReminder.getString("reminder_time"), currentReminder.getString("snooze_time"),
-                currentReminder.getString("reminder_name")))
+                currentReminder.getString("reminder_name"),true))
 
         }
 
