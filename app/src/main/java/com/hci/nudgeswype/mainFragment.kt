@@ -48,8 +48,13 @@ class MainFragment : Fragment() {
         list_recycler_view.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = ListAdapter(reminders)
+
+            //val numItems = adapter!!.itemCount
+
         }
     }
+
+
 
     companion object {
         fun newInstance(): MainFragment = MainFragment()

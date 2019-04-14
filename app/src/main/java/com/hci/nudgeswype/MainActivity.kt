@@ -15,6 +15,7 @@ import java.io.*
 
 
 class MainActivity : SingleFragmentActivity() {
+
     override fun createFragment() = MainFragment.newInstance()
     private var notificationManager: NotificationManager? = null
 
@@ -57,20 +58,14 @@ class MainActivity : SingleFragmentActivity() {
     }
 
 
-    var str = "0"
-    val fragManager = supportFragmentManager
-    val fragTransaction = fragManager.beginTransaction()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         storeInLocalStorage()
 
         super.onCreate(savedInstanceState)
-        //if (savedInstanceState!!.getBoolean("AddFragment")) {
-           // add(reminderFragment())
-        //}
-        setContentView(R.layout.activity_main)
-        //val fragManager = supportFragmentManager
-        //val fragTransaction = fragManager.beginTransaction()
 
+        setContentView(R.layout.activity_main)
 
         notificationManager = getSystemService(
             Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -137,15 +132,7 @@ class MainActivity : SingleFragmentActivity() {
 
     }
 
-    override fun onResume() {
-        super.onResume()
-        //var list = intent.extras.get("reminderInfo")
-    }
-    fun add(reminderFrag: reminderFragment) {
-        fragTransaction.add(reminderFrag, str)
-        fragTransaction.commit()
-        str += "0"
-    }
+
 
 
 
