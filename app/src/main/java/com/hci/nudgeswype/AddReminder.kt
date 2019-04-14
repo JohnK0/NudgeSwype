@@ -179,6 +179,8 @@ class AddReminder : AppCompatActivity() {
         return reminderName
     }
 
+
+
     fun getValues(view: View) {
 //        Toast.makeText(
 //            this, "hour spinner  " + hour_spinner.selectedItem.toString() +
@@ -212,6 +214,7 @@ class AddReminder : AppCompatActivity() {
         newReminder.put("reminder_time",reminder_time)
         newReminder.put("snooze_time",snooze_time)
         newReminder.put("reminder_name",name)
+        newReminder.put("is_active",true);
 
         totalReminders.put((numReminders + 1).toString(),newReminder)
 
