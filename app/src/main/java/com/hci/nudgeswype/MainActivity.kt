@@ -180,22 +180,10 @@ class MainActivity : Activity() {
         notificationManager?.notify(notificationID, notification)
 
     }
-<<<<<<< HEAD
 */
     override fun onResume() {
         super.onResume()
-        //var list = intent.extras.get("reminderInfo")
     }
-    fun add(reminderFrag: reminderFragment) {
-        fragTransaction.add(reminderFrag, str)
-        fragTransaction.commit()
-        str += "0"
-    }
-=======
-
-
->>>>>>> f0f487ea46a3f68e9a20bfc8d9c4e8db953a6ecb
-
 
 
 }
