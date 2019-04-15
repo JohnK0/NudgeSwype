@@ -18,6 +18,21 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <receiver
+                android:name=".ReminderExpiredReceiver"
+                android:enabled="true"
+                android:exported="false" />
+        <receiver
+                android:name=".ReminderNotificationActionReceiver"
+                android:enabled="true"
+                android:exported="false">
+            <intent-filter>
+                <action android:name="SNOOZE"/>
+                <action android:name="FINISH" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

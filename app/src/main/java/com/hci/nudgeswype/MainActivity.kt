@@ -1,9 +1,6 @@
 package com.hci.nudgeswype
 
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
+import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -12,12 +9,12 @@ import android.os.Bundle
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.*
+import java.util.*
 
 
 class MainActivity : SingleFragmentActivity() {
     override fun createFragment() = MainFragment.newInstance()
     private var notificationManager: NotificationManager? = null
-
 
     private fun storeInLocalStorage() {
         val Context = applicationContext
@@ -61,6 +58,7 @@ class MainActivity : SingleFragmentActivity() {
     val fragManager = supportFragmentManager
     val fragTransaction = fragManager.beginTransaction()
     override fun onCreate(savedInstanceState: Bundle?) {
+
         storeInLocalStorage()
 
         super.onCreate(savedInstanceState)
@@ -74,7 +72,7 @@ class MainActivity : SingleFragmentActivity() {
 
         notificationManager = getSystemService(
             Context.NOTIFICATION_SERVICE) as NotificationManager
-
+/*
         createNotificationChannel(
             "com.hci.nudgeswype",
             "reminder notification",
@@ -82,6 +80,10 @@ class MainActivity : SingleFragmentActivity() {
         )
 
         sendNotification(notification_button)
+*/
+        notification_button.setOnClickListener {
+            val wakeUpTime = setAlarm(this, nowSeconds, 5)
+        }
 
         addReminder.setOnClickListener{
             val intent = Intent(this, AddReminder::class.java)
@@ -89,7 +91,29 @@ class MainActivity : SingleFragmentActivity() {
         }
     }
 
+    companion object {
+        fun setAlarm(context: Context, nowSeconds: Long, secondsRemaining: Long): Long{
+            val wakeUpTime = (nowSeconds + secondsRemaining) * 1000
+            val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            val intent = Intent(context, ReminderExpiredReceiver::class.java)
+            val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, wakeUpTime, pendingIntent)
+//            PrefUtil.setAlarmSetTime(nowSeconds, context)
+            return wakeUpTime
+        }
 
+        val nowSeconds: Long
+            get() = Calendar.getInstance().timeInMillis / 1000
+
+        fun removeAlarm(context: Context){
+            val intent = Intent(context, ReminderExpiredReceiver::class.java)
+            val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
+            val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            alarmManager.cancel(pendingIntent)
+//            PrefUtil.setAlarmSetTime(0, context)
+        }
+    }
+/*
     private fun createNotificationChannel(id: String, name: String, description: String){
         //  importance level set to low
         val importance = NotificationManager.IMPORTANCE_LOW
@@ -100,7 +124,7 @@ class MainActivity : SingleFragmentActivity() {
         channel.lightColor = Color.RED
         channel.enableVibration(true)
         channel.vibrationPattern =
-                longArrayOf(100, 200, 300, 400, 500, 400, 300, 200, 400)
+            longArrayOf(100, 200, 300, 400, 500, 400, 300, 200, 400)
         notificationManager?.createNotificationChannel(channel)
     }
 
@@ -136,7 +160,7 @@ class MainActivity : SingleFragmentActivity() {
         notificationManager?.notify(notificationID, notification)
 
     }
-
+*/
     override fun onResume() {
         super.onResume()
         //var list = intent.extras.get("reminderInfo")
