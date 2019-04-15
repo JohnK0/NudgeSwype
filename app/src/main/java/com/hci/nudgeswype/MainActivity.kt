@@ -1,27 +1,29 @@
 package com.hci.nudgeswype
 
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
+import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.Icon
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.*
 
 
-class MainActivity : SingleFragmentActivity() {
+class MainActivity : Activity() {
 
-    override fun createFragment() = MainFragment.newInstance()
+    //override fun createFragments() = MainFragment.newInstance()
     private var notificationManager: NotificationManager? = null
 
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    private lateinit var viewManager: RecyclerView.LayoutManager
 
     private fun storeInLocalStorage() {
-        val Context = applicationContext
+        val Context = this.applicationContext
          val DestinationFile = Context.filesDir.path + File.separator + "reminders.json"
         //val DestinationFile = baseContext.getFileStreamPath("reminders.json")
         if (!File(DestinationFile).exists()) {
@@ -63,11 +65,34 @@ class MainActivity : SingleFragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         storeInLocalStorage()
 
+
+
         super.onCreate(savedInstanceState)
 
+        var reminders = MainFragment.createReminderList(this.applicationContext)
         setContentView(R.layout.activity_main)
 
-        notificationManager = getSystemService(
+
+
+        viewManager = LinearLayoutManager(this)
+        viewAdapter = ListAdapter(reminders)
+
+        recyclerView = findViewById<RecyclerView>(R.id.my_recycler_view).apply {
+            // use this setting to improve performance if you know that changes
+            // in content do not change the layout size of the RecyclerView
+            setHasFixedSize(true)
+
+            // use a linear layout manager
+            layoutManager = viewManager
+
+            // specify an viewAdapter (see also next example)
+            adapter = viewAdapter
+
+
+        }
+
+
+            notificationManager = getSystemService(
             Context.NOTIFICATION_SERVICE) as NotificationManager
 
         createNotificationChannel(
