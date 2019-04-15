@@ -6,18 +6,24 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.Icon
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.*
 import java.util.*
 
 
-class MainActivity : SingleFragmentActivity() {
-    override fun createFragment() = MainFragment.newInstance()
+class MainActivity : Activity() {
+
+    //override fun createFragments() = MainFragment.newInstance()
     private var notificationManager: NotificationManager? = null
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    private lateinit var viewManager: RecyclerView.LayoutManager
 
     private fun storeInLocalStorage() {
-        val Context = applicationContext
+        val Context = this.applicationContext
          val DestinationFile = Context.filesDir.path + File.separator + "reminders.json"
         //val DestinationFile = baseContext.getFileStreamPath("reminders.json")
         if (!File(DestinationFile).exists()) {
@@ -54,23 +60,37 @@ class MainActivity : SingleFragmentActivity() {
     }
 
 
-    var str = "0"
-    val fragManager = supportFragmentManager
-    val fragTransaction = fragManager.beginTransaction()
-    override fun onCreate(savedInstanceState: Bundle?) {
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
         storeInLocalStorage()
 
         super.onCreate(savedInstanceState)
-        //if (savedInstanceState!!.getBoolean("AddFragment")) {
-           // add(reminderFragment())
-        //}
+
+        var reminders = MainFragment.createReminderList(this.applicationContext)
         setContentView(R.layout.activity_main)
-        //val fragManager = supportFragmentManager
-        //val fragTransaction = fragManager.beginTransaction()
 
 
-        notificationManager = getSystemService(
+
+        viewManager = LinearLayoutManager(this)
+        viewAdapter = ListAdapter(reminders)
+
+        recyclerView = findViewById<RecyclerView>(R.id.my_recycler_view).apply {
+            // use this setting to improve performance if you know that changes
+            // in content do not change the layout size of the RecyclerView
+            setHasFixedSize(true)
+
+            // use a linear layout manager
+            layoutManager = viewManager
+
+            // specify an viewAdapter (see also next example)
+            adapter = viewAdapter
+
+
+        }
+
+
+            notificationManager = getSystemService(
             Context.NOTIFICATION_SERVICE) as NotificationManager
 /*
         createNotificationChannel(
@@ -160,6 +180,7 @@ class MainActivity : SingleFragmentActivity() {
         notificationManager?.notify(notificationID, notification)
 
     }
+<<<<<<< HEAD
 */
     override fun onResume() {
         super.onResume()
@@ -170,6 +191,10 @@ class MainActivity : SingleFragmentActivity() {
         fragTransaction.commit()
         str += "0"
     }
+=======
+
+
+>>>>>>> f0f487ea46a3f68e9a20bfc8d9c4e8db953a6ecb
 
 
 

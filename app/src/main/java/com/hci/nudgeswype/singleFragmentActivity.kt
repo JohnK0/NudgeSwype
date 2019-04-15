@@ -11,7 +11,7 @@ abstract class SingleFragmentActivity : AppCompatActivity() {
         @LayoutRes
         get() = R.layout.activity_main
 
-    protected abstract fun createFragment(): Fragment
+    protected abstract fun createFragments(): Fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,11 +23,13 @@ abstract class SingleFragmentActivity : AppCompatActivity() {
 
         // ensures fragments already created will not be created
         if (fragment == null) {
-            fragment = createFragment()
+            fragment = createFragments()
             // create and commit a fragment transaction
             fm.beginTransaction()
                 .add(R.id.fragment_container, fragment)
                 .commit()
         }
+
+
     }
 }

@@ -48,8 +48,13 @@ class MainFragment : Fragment() {
         list_recycler_view.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = ListAdapter(reminders)
+
+            //val numItems = adapter!!.itemCount
+
         }
     }
+
+
 
     companion object {
         fun newInstance(): MainFragment = MainFragment()
@@ -82,7 +87,7 @@ class MainFragment : Fragment() {
         for (i in 0 until length) {
             val currentReminder = totalReminders.getJSONObject((i+1).toString())
             reminders.add(reminder_object(currentReminder.getString("reminder_time"), currentReminder.getString("snooze_time"),
-                currentReminder.getString("reminder_name"),true))
+                currentReminder.getString("reminder_name"),currentReminder.getBoolean("is_active")))
 
         }
 
