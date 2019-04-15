@@ -8,7 +8,7 @@ import java.io.IOException
 data class reminder_object(val reminder_time: String, val snooze_time: String, val name: String, val isChecked: Boolean )
 
 class MainFragment  {
-
+    // hello
     //private var reminders = ArrayList<reminder_object>(0)
 
     // static method in kotlin
