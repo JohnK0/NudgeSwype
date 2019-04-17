@@ -99,7 +99,7 @@ class AddReminder : AppCompatActivity() {
         newReminder.put("reminder_time",reminder_time)
         newReminder.put("snooze_time",snooze_time)
         newReminder.put("reminder_name",name)
-        newReminder.put("is_active",true);
+        newReminder.put("is_active",false);
 
         totalReminders.put((numReminders + 1).toString(),newReminder)
 

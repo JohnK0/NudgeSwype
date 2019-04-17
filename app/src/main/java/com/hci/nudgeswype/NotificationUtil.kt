@@ -12,7 +12,7 @@ import android.os.Build
 import android.support.v4.app.NotificationCompat
 import android.view.View
 
-
+//https://github.com/ResoCoder/TimerAppAndroidTutorial/tree/master/app/src/main/java/com/resocoder/timertutorial
 class NotificationUtil {
     companion object {
         val channelID = "com.hci.nudgeswype"

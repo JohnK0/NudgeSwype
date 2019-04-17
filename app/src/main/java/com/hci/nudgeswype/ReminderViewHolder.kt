@@ -87,12 +87,18 @@ class ReminderViewHolder(inflater: LayoutInflater, parent: ViewGroup, parentCont
         reminderSwitch?.setChecked(reminder.isChecked)
 
         changeBackground(reminderSwitch!!.isChecked,reminderBox)
-
         reminderSwitch?.setOnCheckedChangeListener({ _, isChecked ->
             updateJSON(this.adapterPosition)
             changeBackground(isChecked,reminderBox)
+            alarmState(isChecked)
 
         })
+    }
+
+    private fun alarmState(checked: Boolean) {
+        if (checked) {
+            val wakeUpTime = MainActivity.setAlarm(parentContext, MainActivity.nowSeconds, 5)
+        }
     }
 
     private fun changeBackground(checked: Boolean, view: ConstraintLayout?) {

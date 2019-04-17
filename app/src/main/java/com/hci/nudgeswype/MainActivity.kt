@@ -100,10 +100,11 @@ class MainActivity : Activity() {
         )
 
         sendNotification(notification_button)
-*/
+
         notification_button.setOnClickListener {
             val wakeUpTime = setAlarm(this, nowSeconds, 5)
         }
+*/
 
         addReminder.setOnClickListener{
             val intent = Intent(this, AddReminder::class.java)
