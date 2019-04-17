@@ -1,6 +1,8 @@
 package com.hci.nudgeswype
 
 import android.content.Context
+import android.graphics.Color
+import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -22,7 +24,7 @@ class ReminderViewHolder(inflater: LayoutInflater, parent: ViewGroup, parentCont
     private var reminderTimeView: TextView? = null
     private var reminderSnoozeView: TextView? = null
     private val reminderSwitch: Switch?
-
+    private var reminderBox: ConstraintLayout? = null
 
     override fun onClick(v: View?) {
         val viewID = v!!.id
@@ -74,6 +76,7 @@ class ReminderViewHolder(inflater: LayoutInflater, parent: ViewGroup, parentCont
         reminderTimeView = itemView.findViewById(R.id.reminderTime)
         reminderSnoozeView = itemView.findViewById(R.id.reminderSnooze)
         reminderSwitch = itemView.findViewById(R.id.reminderSwitch)
+        reminderBox = itemView.findViewById(R.id.reminderBox)
 
     }
 
@@ -82,9 +85,23 @@ class ReminderViewHolder(inflater: LayoutInflater, parent: ViewGroup, parentCont
         reminderTimeView?.text = reminder.reminder_time
         reminderSnoozeView?.text = reminder.snooze_time
         reminderSwitch?.setChecked(reminder.isChecked)
+
+        changeBackground(reminderSwitch!!.isChecked,reminderBox)
+
         reminderSwitch?.setOnCheckedChangeListener({ _, isChecked ->
             updateJSON(this.adapterPosition)
+            changeBackground(isChecked,reminderBox)
+
         })
+    }
+
+    private fun changeBackground(checked: Boolean, view: ConstraintLayout?) {
+        if (checked) {
+            view!!.setBackgroundColor(Color.rgb(51, 181, 229))
+        } else {
+
+            view!!.setBackgroundColor(Color.LTGRAY)
+        }
     }
 
 }
