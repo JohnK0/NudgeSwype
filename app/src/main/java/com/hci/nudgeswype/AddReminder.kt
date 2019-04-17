@@ -21,7 +21,7 @@ class AddReminder : AppCompatActivity() {
         setContentView(R.layout.activity_add_reminder)
         val np: NumberPicker = findViewById(R.id.numPicker)
 
-        np.setMinValue(0)
+        np.setMinValue(1)
         np.setMaxValue(59)
         np.setWrapSelectorWheel(true)
 
