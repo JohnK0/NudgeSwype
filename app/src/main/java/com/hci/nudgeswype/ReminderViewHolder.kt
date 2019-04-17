@@ -98,7 +98,8 @@ class ReminderViewHolder(inflater: LayoutInflater, parent: ViewGroup, parentCont
 
     private fun alarmState(checked: Boolean, adapterPosition: Int) {
         if (checked) {
-            AlarmUtil.setAlarm(parentContext, adapterPosition, AlarmUtil.nowSeconds, 5)
+
+            AlarmUtil.setAlarm(parentContext, adapterPosition, AlarmUtil.nowSeconds, 5, false)
         }
     }
 

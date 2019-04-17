@@ -8,8 +8,11 @@ import java.util.*
 
 class AlarmUtil(){
     companion object {
-        fun setAlarm(context: Context, requestCode: Int, nowSeconds: Long, alarmTime: Long) {
-            val wakeUpTime = (nowSeconds + alarmTime) * 1000
+        fun setAlarm(context: Context, requestCode: Int, nowSeconds: Long, alarmTime: Long, isSnooze: Boolean) {
+            var wakeUpTime: Long
+ //           if (isSnooze)
+                wakeUpTime = (nowSeconds + alarmTime) * 1000
+
             val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             val intent = Intent(context, ReminderExpiredReceiver::class.java)
             intent.putExtra("request code", requestCode)

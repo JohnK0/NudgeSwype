@@ -11,12 +11,12 @@ class ReminderNotificationActionReceiver : BroadcastReceiver() {
         when (intent.action){
             AppConstants.ACTION_SNOOZE -> {
       //          val secondsRemaining = PrefUtil.getSecondsRemaining(context)
-                MainActivity.setAlarm(context, intent.getIntExtra("request code", 0), MainActivity.nowSeconds, 5)
+                AlarmUtil.setAlarm(context, intent.getIntExtra("request code", 0), AlarmUtil.nowSeconds, 5, true)
                 //PrefUtil.setTimerState(MainActivity.TimerState.Running, context)
                 NotificationUtil.hideTimerNotification(context)
             }
             AppConstants.ACTION_FINISH -> {
-                MainActivity.removeAlarm(context)
+                AlarmUtil.removeAlarm(context)
 //                PrefUtil.setTimerState(MainActivity.TimerState.Stopped, context)
                 NotificationUtil.hideTimerNotification(context)
             }

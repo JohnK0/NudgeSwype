@@ -54,7 +54,7 @@ class AddReminder : AppCompatActivity() {
                 reminderHour = reminderHour - 12
         }
 
-        val reminderTime = reminderHour.toString() + ":" + convertMinuteToString(reminderMinute) + " " + period
+        val reminderTime = "Reminder Time: " + reminderHour.toString() + ":" + convertMinuteToString(reminderMinute) + " " + period
         return reminderTime
 
     }
@@ -62,7 +62,7 @@ class AddReminder : AppCompatActivity() {
     fun getSnoozeTime(): String {
         val snoozePicker: NumberPicker = findViewById(R.id.numPicker)
         val snoozeTime = snoozePicker.getValue()
-        return "0:" + convertMinuteToString(snoozeTime)
+        return "Snooze:\n" + convertMinuteToString(snoozeTime)
     }
 
     fun getReminderName(): String {
