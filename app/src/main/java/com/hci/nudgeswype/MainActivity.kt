@@ -93,25 +93,4 @@ class MainActivity : Activity() {
             startActivity(intent)
         }
     }
-
-    companion object {
-        fun setAlarm(context: Context, requestCode: Int, nowSeconds: Long, secondsRemaining: Long) {
-            val wakeUpTime = (nowSeconds + secondsRemaining) * 1000
-            val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-            val intent = Intent(context, ReminderExpiredReceiver::class.java)
-            intent.putExtra("request code", requestCode)
-            val pendingIntent = PendingIntent.getBroadcast(context, requestCode, intent, 0)
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, wakeUpTime, pendingIntent)
-        }
-
-        val nowSeconds: Long
-            get() = Calendar.getInstance().timeInMillis / 1000
-
-        fun removeAlarm(context: Context){
-            val intent = Intent(context, ReminderExpiredReceiver::class.java)
-            val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
-            val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-            alarmManager.cancel(pendingIntent)
-        }
-    }
 }
