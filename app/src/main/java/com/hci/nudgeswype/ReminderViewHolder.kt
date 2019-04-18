@@ -99,16 +99,28 @@ class ReminderViewHolder(inflater: LayoutInflater, parent: ViewGroup, parentCont
 
     fun timeToSeconds(reminder: reminder_object): Long {
         val slicedReminder = reminder.reminder_time.removePrefix("Reminder Time: ")
-        val reminderHour: Int
+        var reminderHour: Int
         val reminderMin: Int
-        if (slicedReminder.substring(1) != ":") {
-            reminderHour = slicedReminder.substring(0, 1).toInt()
-            reminderMin = slicedReminder.substring(3, 4).toInt()
+        val amOrPm = slicedReminder.substring(slicedReminder.length-2)
+
+        var index = 0
+        var reminderHourString: String = ""
+        while (slicedReminder.get(index) != ':') {
+            reminderHourString += slicedReminder.get(index)
+            index++;
         }
-        else {
-            reminderHour = slicedReminder.substring(0).toInt()
-            reminderMin = slicedReminder.substring(2, 3).toInt()
+
+        reminderHour = reminderHourString.toInt()
+
+        reminderMin = slicedReminder.substring(index+1,index+3).toInt()
+        if (amOrPm.equals("PM")) {
+            if (reminderHour < 12) {
+                reminderHour += 12
+            }
         }
+        Log.i("hour",reminderHour.toString())
+        Log.i("min",reminderMin.toString())
+        Log.i("amorpm",amOrPm)
 
         return (reminderHour*3600 + reminderMin*60).toLong()
     }
