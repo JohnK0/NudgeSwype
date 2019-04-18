@@ -31,5 +31,17 @@ class AlarmUtil(){
             val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             alarmManager.cancel(pendingIntent)
         }
+
+
+        // converts snooze string into a string
+        fun convertSnoozeToSeconds(snoozeStr: String): Int {
+            val trimStr = snoozeStr.removePrefix("Snooze\n");
+
+            val snoozeMin = trimStr.toInt()
+
+            val snoozeSeconds = snoozeMin * 60
+
+            return snoozeSeconds
+        }
     }
 }
