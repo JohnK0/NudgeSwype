@@ -143,8 +143,7 @@ class ReminderViewHolder(inflater: LayoutInflater, parent: ViewGroup, parentCont
 
             Log.d("ALARM TIME: ", alarmTime.toString())
             Log.d("SNOOZE TIME: ",  snoozeTime.toString())
-            AlarmUtil.setAlarm(parentContext, adapterPosition, AlarmUtil.nowSeconds, alarmTime, snoozeTime, false,
-                reminderNameView!!.text.toString())
+            AlarmUtil.setAlarm(parentContext, adapterPosition, AlarmUtil.nowSeconds, alarmTime, snoozeTime, false, reminder.name)
         }
     }
 

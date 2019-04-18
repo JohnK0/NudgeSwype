@@ -22,6 +22,8 @@ class NotificationUtil {
 
         fun showTimerExpired(context: Context,intent: Intent){
             val snoozeIntent = Intent(context, ReminderNotificationActionReceiver::class.java)
+            snoozeIntent.putExtra("reminder name", intent.getStringExtra("reminder name"))
+            snoozeIntent.putExtra("reminder snooze time", intent.getLongExtra("reminder snooze", 0))
             snoozeIntent.action = AppConstants.ACTION_SNOOZE
             val snoozePendingIntent = PendingIntent.getBroadcast(context,
                 0, snoozeIntent, PendingIntent.FLAG_UPDATE_CURRENT)
