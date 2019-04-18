@@ -7,6 +7,6 @@ import android.content.Intent
 class ReminderExpiredReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
-        NotificationUtil.showTimerExpired(context)
+        NotificationUtil.showTimerExpired(context,intent)
     }
 }

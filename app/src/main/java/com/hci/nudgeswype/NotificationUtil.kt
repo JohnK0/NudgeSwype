@@ -1,16 +1,17 @@
 package com.hci.nudgeswype
 
 import android.annotation.TargetApi
-import android.app.*
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.app.TaskStackBuilder
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.drawable.Icon
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
 import android.support.v4.app.NotificationCompat
-import android.view.View
 
 //https://github.com/ResoCoder/TimerAppAndroidTutorial/tree/master/app/src/main/java/com/resocoder/timertutorial
 class NotificationUtil {
@@ -19,7 +20,7 @@ class NotificationUtil {
         private const val channelName = "reminder notification"
         private const val TIMER_ID = 0
 
-        fun showTimerExpired(context: Context){
+        fun showTimerExpired(context: Context,intent: Intent){
             val snoozeIntent = Intent(context, ReminderNotificationActionReceiver::class.java)
             snoozeIntent.action = AppConstants.ACTION_SNOOZE
             val snoozePendingIntent = PendingIntent.getBroadcast(context,
@@ -31,7 +32,7 @@ class NotificationUtil {
                 0, finishIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
             val nBuilder = getBasicNotificationBuilder(context, channelID, true)
-            nBuilder.setContentTitle("Reminder!")
+            nBuilder.setContentTitle(intent.getStringExtra("reminder name"))
                 .setContentText("Finished?")
                 .setContentIntent(getPendingIntentWithStack(context, MainActivity::class.java))
                 .addAction(R.drawable.notification_template_icon_bg, "Snooze", snoozePendingIntent)

@@ -15,8 +15,6 @@ import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
 class ReminderViewHolder(inflater: LayoutInflater, parent: ViewGroup, parentContext: Context) :
     RecyclerView.ViewHolder(inflater.inflate(R.layout.reminder, parent, false)), View.OnClickListener  {
@@ -133,7 +131,8 @@ class ReminderViewHolder(inflater: LayoutInflater, parent: ViewGroup, parentCont
 
             Log.d("ALARM TIME: ", alarmTime.toString())
             Log.d("SNOOZE TIME: ",  snoozeTime.toString())
-            AlarmUtil.setAlarm(parentContext, adapterPosition, AlarmUtil.nowSeconds, alarmTime, snoozeTime, false)
+            AlarmUtil.setAlarm(parentContext, adapterPosition, AlarmUtil.nowSeconds, alarmTime, snoozeTime, false,
+                reminderNameView!!.text.toString())
         }
     }
 

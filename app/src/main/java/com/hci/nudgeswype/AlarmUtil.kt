@@ -8,7 +8,8 @@ import java.util.*
 
 class AlarmUtil(){
     companion object {
-        fun setAlarm(context: Context, requestCode: Int, nowSeconds: Long, alarmTime: Long, snoozeTime: Long, isSnooze: Boolean) {
+        fun setAlarm(context: Context, requestCode: Int, nowSeconds: Long, alarmTime: Long, snoozeTime: Long, isSnooze: Boolean,
+                     reminderName: String) {
             var wakeUpTime: Long
             if (!isSnooze)
                 wakeUpTime = alarmTime
@@ -19,6 +20,7 @@ class AlarmUtil(){
             val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             val intent = Intent(context, ReminderExpiredReceiver::class.java)
             intent.putExtra("request code", requestCode)
+            intent.putExtra("reminder name",reminderName)
             val pendingIntent = PendingIntent.getBroadcast(context, requestCode, intent, 0)
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, wakeUpTime, pendingIntent)
         }
