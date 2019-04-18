@@ -14,6 +14,8 @@ import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class ReminderViewHolder(inflater: LayoutInflater, parent: ViewGroup, parentContext: Context) :
     RecyclerView.ViewHolder(inflater.inflate(R.layout.reminder, parent, false)), View.OnClickListener  {
@@ -91,15 +93,31 @@ class ReminderViewHolder(inflater: LayoutInflater, parent: ViewGroup, parentCont
         reminderSwitch?.setOnCheckedChangeListener({ _, isChecked ->
             updateJSON(this.adapterPosition)
             changeBackground(isChecked,reminderBox)
-            alarmState(isChecked, this.adapterPosition)
+            alarmState(isChecked, this.adapterPosition, reminder)
 
         })
     }
 
-    private fun alarmState(checked: Boolean, adapterPosition: Int) {
-        if (checked) {
+    fun timeToSeconds(reminder: reminder_object): Long {
+        val slicedReminder = reminder.reminder_time.removePrefix("Reminder: ")
+        val reminderHour: Int
+        val reminderMin: Int
+        if (slicedReminder.substring(1) != ":") {
+            reminderHour = slicedReminder.substring(0, 1).toInt()
+            reminderMin = slicedReminder.substring(3, 4).toInt()
+        }
+        else {
+            reminderHour = slicedReminder.substring(0).toInt()
+            reminderMin = slicedReminder.substring(2, 3).toInt()
+        }
 
-            AlarmUtil.setAlarm(parentContext, adapterPosition, AlarmUtil.nowSeconds, 5, false)
+        return (reminderHour*3600 + reminderMin*60).toLong()
+    }
+
+    private fun alarmState(checked: Boolean, adapterPosition: Int, reminder: reminder_object) {
+        if (checked) {
+            val alarmTime = timeToSeconds(reminder)
+            AlarmUtil.setAlarm(parentContext, adapterPosition, AlarmUtil.nowSeconds, alarmTime, false)
         }
     }
 
