@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -99,7 +100,7 @@ class ReminderViewHolder(inflater: LayoutInflater, parent: ViewGroup, parentCont
     }
 
     fun timeToSeconds(reminder: reminder_object): Long {
-        val slicedReminder = reminder.reminder_time.removePrefix("Reminder: ")
+        val slicedReminder = reminder.reminder_time.removePrefix("Reminder Time: ")
         val reminderHour: Int
         val reminderMin: Int
         if (slicedReminder.substring(1) != ":") {
@@ -114,10 +115,25 @@ class ReminderViewHolder(inflater: LayoutInflater, parent: ViewGroup, parentCont
         return (reminderHour*3600 + reminderMin*60).toLong()
     }
 
+    // converts snooze string into a string
+    fun convertSnoozeToSeconds(snoozeStr: String): Int {
+        val trimStr = snoozeStr.removePrefix("Snooze:\n");
+
+        val snoozeMin = trimStr.toInt()
+
+        val snoozeSeconds = snoozeMin * 60
+
+        return snoozeSeconds
+    }
+
     private fun alarmState(checked: Boolean, adapterPosition: Int, reminder: reminder_object) {
         if (checked) {
             val alarmTime = timeToSeconds(reminder)
-            AlarmUtil.setAlarm(parentContext, adapterPosition, AlarmUtil.nowSeconds, alarmTime, false)
+            val snoozeTime = convertSnoozeToSeconds(reminder.snooze_time).toLong()
+
+            Log.d("ALARM TIME: ", alarmTime.toString())
+            Log.d("SNOOZE TIME: ",  snoozeTime.toString())
+            AlarmUtil.setAlarm(parentContext, adapterPosition, AlarmUtil.nowSeconds, alarmTime, snoozeTime, false)
         }
     }
 

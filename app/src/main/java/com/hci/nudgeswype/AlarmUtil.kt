@@ -8,11 +8,12 @@ import java.util.*
 
 class AlarmUtil(){
     companion object {
-        fun setAlarm(context: Context, requestCode: Int, nowSeconds: Long, alarmTime: Long, isSnooze: Boolean) {
+        fun setAlarm(context: Context, requestCode: Int, nowSeconds: Long, alarmTime: Long, snoozeTime: Long, isSnooze: Boolean) {
             var wakeUpTime: Long
-            wakeUpTime = alarmTime
-            if (isSnooze)
-                wakeUpTime = (nowSeconds + wakeUpTime)
+            if (!isSnooze)
+                wakeUpTime = alarmTime
+            else
+                wakeUpTime = (nowSeconds + snoozeTime)
             wakeUpTime = wakeUpTime * 1000
 
             val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
@@ -30,18 +31,6 @@ class AlarmUtil(){
             val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
             val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             alarmManager.cancel(pendingIntent)
-        }
-
-
-        // converts snooze string into a string
-        fun convertSnoozeToSeconds(snoozeStr: String): Int {
-            val trimStr = snoozeStr.removePrefix("Snooze\n");
-
-            val snoozeMin = trimStr.toInt()
-
-            val snoozeSeconds = snoozeMin * 60
-
-            return snoozeSeconds
         }
     }
 }
