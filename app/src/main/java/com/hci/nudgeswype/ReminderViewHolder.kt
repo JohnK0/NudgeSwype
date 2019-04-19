@@ -32,16 +32,39 @@ class ReminderViewHolder(inflater: LayoutInflater, parent: ViewGroup, parentCont
 
 
         if (viewID.equals(R.id.reminderSwitch)) {
-            updateJSON(this.adapterPosition)
+            updateJSON(this.adapterPosition, parentContext)
         }
     }
 
-    private fun updateJSON(adapterPosition: Int) {
-        val file = loadJSON(parentContext )
+    companion object {
+        fun updateJSONFromNotification(adapterPosition: Int, parentContext: Context) {
+            val file = loadJSON(parentContext )
 
-        val reminders = JSONObject(file).getJSONObject("reminders")
+            val reminders = JSONObject(file).getJSONObject("reminders")
 
-        //val length = totalReminders.length()
+            //val length = totalReminders.length()
+
+
+            val currentReminder = reminders.getJSONObject((adapterPosition+1).toString())
+            var currentVal = currentReminder.getBoolean("is_active")
+
+
+            currentReminder.remove(("is_active"))
+            currentReminder.put("is_active",!currentVal)
+
+            reminders.remove((adapterPosition+1).toString())
+            reminders.put((adapterPosition+1).toString(),currentReminder)
+
+            writeToFile(reminders, parentContext)
+            //reminders.remove((adapter))
+        }
+
+        fun updateJSON(adapterPosition: Int, parentContext: Context) {
+            val file = loadJSON(parentContext )
+
+            val reminders = JSONObject(file).getJSONObject("reminders")
+
+            //val length = totalReminders.length()
 
 
             val currentReminder = reminders.getJSONObject((adapterPosition+1).toString())
@@ -53,22 +76,22 @@ class ReminderViewHolder(inflater: LayoutInflater, parent: ViewGroup, parentCont
             reminders.remove((adapterPosition+1).toString())
             reminders.put((adapterPosition+1).toString(),currentReminder)
 
-            writeToFile(reminders)
+            writeToFile(reminders, parentContext)
             //reminders.remove((adapter))
 
-    }
+        }
+        fun writeToFile(reminders: JSONObject, parentContext: Context) {
+            val newJsonText = "{ \"reminders\":" + reminders.toString() + "}"
+            //Log.i("newjson",newJsonText)
 
-    private fun writeToFile(reminders: JSONObject) {
-        val newJsonText = "{ \"reminders\":" + reminders.toString() + "}"
-        //Log.i("newjson",newJsonText)
+            try {
+                val `is` = FileOutputStream( parentContext.filesDir.path + File.separator + "reminders.json")
+                `is`.write(newJsonText.toByteArray())
+                `is`.close()
+            } catch (ex: IOException) {
+                ex.printStackTrace()
 
-        try {
-            val `is` = FileOutputStream( parentContext.filesDir.path + File.separator + "reminders.json")
-            `is`.write(newJsonText.toByteArray())
-            `is`.close()
-        } catch (ex: IOException) {
-            ex.printStackTrace()
-
+            }
         }
     }
 
@@ -90,7 +113,7 @@ class ReminderViewHolder(inflater: LayoutInflater, parent: ViewGroup, parentCont
         changeBackground(reminderSwitch!!.isChecked,reminderBox)
         (this.adapterPosition)
         reminderSwitch?.setOnCheckedChangeListener({ _, isChecked ->
-            updateJSON(this.adapterPosition)
+            updateJSON(this.adapterPosition, parentContext)
             changeBackground(isChecked,reminderBox)
             alarmState(isChecked, this.adapterPosition, reminder)
 
@@ -140,7 +163,6 @@ class ReminderViewHolder(inflater: LayoutInflater, parent: ViewGroup, parentCont
         if (checked) {
             val alarmTime = timeToSeconds(reminder)
             val snoozeTime = convertSnoozeToSeconds(reminder.snooze_time).toLong()
-
             Log.d("ALARM TIME: ", alarmTime.toString())
             Log.d("SNOOZE TIME: ",  snoozeTime.toString())
             AlarmUtil.setAlarm(parentContext, adapterPosition, AlarmUtil.nowSeconds, alarmTime, snoozeTime, false, reminder.name)
@@ -155,5 +177,4 @@ class ReminderViewHolder(inflater: LayoutInflater, parent: ViewGroup, parentCont
             view!!.setBackgroundColor(Color.LTGRAY)
         }
     }
-
 }

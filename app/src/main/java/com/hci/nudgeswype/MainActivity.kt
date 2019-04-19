@@ -80,8 +80,6 @@ class MainActivity : Activity() {
 
             // specify an viewAdapter (see also next example)
             adapter = viewAdapter
-
-
         }
 
 

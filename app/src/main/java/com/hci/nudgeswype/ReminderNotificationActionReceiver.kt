@@ -15,9 +15,11 @@ class ReminderNotificationActionReceiver : BroadcastReceiver() {
                     intent.getLongExtra("reminder snooze time", 0), true, intent.getStringExtra("reminder name"))
                 //PrefUtil.setTimerState(MainActivity.TimerState.Running, context)
                 NotificationUtil.hideTimerNotification(context)
+
             }
             AppConstants.ACTION_FINISH -> {
                 AlarmUtil.removeAlarm(context)
+                ReminderViewHolder.updateJSON(intent.getIntExtra("request code", 0), context)
 //                PrefUtil.setTimerState(MainActivity.TimerState.Stopped, context)
                 NotificationUtil.hideTimerNotification(context)
             }

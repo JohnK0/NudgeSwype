@@ -29,6 +29,7 @@ class NotificationUtil {
                 0, snoozeIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
             val finishIntent = Intent(context, ReminderNotificationActionReceiver::class.java)
+            finishIntent.putExtra("request code", intent.getIntExtra("request code", 0))
             finishIntent.action = AppConstants.ACTION_FINISH
             val finishPendingIntent = PendingIntent.getBroadcast(context,
                 0, finishIntent, PendingIntent.FLAG_UPDATE_CURRENT)
