@@ -19,7 +19,7 @@ class ReminderNotificationActionReceiver : BroadcastReceiver() {
             }
             AppConstants.ACTION_FINISH -> {
                 AlarmUtil.removeAlarm(context)
-                ReminderViewHolder.updateJSON(intent.getIntExtra("request code", 0), context)
+               // ReminderViewHolder.updateJSON(intent.getIntExtra("request code", 0), context)
 //                PrefUtil.setTimerState(MainActivity.TimerState.Stopped, context)
                 NotificationUtil.hideTimerNotification(context)
             }

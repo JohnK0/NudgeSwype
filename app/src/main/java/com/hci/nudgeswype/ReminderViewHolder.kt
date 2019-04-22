@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.Switch
 import android.widget.TextView
 import com.hci.nudgeswype.MainFragment.Companion.loadJSON
@@ -26,6 +27,7 @@ class ReminderViewHolder(inflater: LayoutInflater, parent: ViewGroup, parentCont
     private var reminderSnoozeView: TextView? = null
     private val reminderSwitch: Switch?
     private var reminderBox: ConstraintLayout? = null
+    private var deleteBox: CheckBox? = null
 
     override fun onClick(v: View?) {
         val viewID = v!!.id
@@ -101,6 +103,7 @@ class ReminderViewHolder(inflater: LayoutInflater, parent: ViewGroup, parentCont
         reminderSnoozeView = itemView.findViewById(R.id.reminderSnooze)
         reminderSwitch = itemView.findViewById(R.id.reminderSwitch)
         reminderBox = itemView.findViewById(R.id.reminderBox)
+        deleteBox = itemView.findViewById(R.id.deleteBox)
 
     }
 
@@ -177,4 +180,9 @@ class ReminderViewHolder(inflater: LayoutInflater, parent: ViewGroup, parentCont
             view!!.setBackgroundColor(Color.LTGRAY)
         }
     }
+
+    public fun deleteAlarm() {
+        AlarmUtil.removeAlarm(parentContext)
+    }
+
 }

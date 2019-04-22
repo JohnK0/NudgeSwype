@@ -1,14 +1,16 @@
 package com.hci.nudgeswype
 
-import android.app.*
+import android.app.Activity
+import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.ViewGroup
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.reminder.view.*
 import java.io.*
-import java.util.*
 
 
 class MainActivity : Activity() {
@@ -17,6 +19,8 @@ class MainActivity : Activity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
+    private var reminderViewGroup: ViewGroup? = null
+    private var reminders: MutableList<reminder_object>? = null
 
     private fun storeInLocalStorage() {
         val Context = this.applicationContext
@@ -62,13 +66,16 @@ class MainActivity : Activity() {
 
         super.onCreate(savedInstanceState)
 
-        var reminders = MainFragment.createReminderList(this.applicationContext)
+         reminders = MainFragment.createReminderList(this.applicationContext)
         setContentView(R.layout.activity_main)
 
 
 
         viewManager = LinearLayoutManager(this)
-        viewAdapter = ListAdapter(reminders)
+        viewAdapter = ListAdapter(reminders as ArrayList<reminder_object>)
+
+
+
 
         recyclerView = findViewById<RecyclerView>(R.id.my_recycler_view).apply {
             // use this setting to improve performance if you know that changes
@@ -82,7 +89,7 @@ class MainActivity : Activity() {
             adapter = viewAdapter
         }
 
-
+        reminderViewGroup = (viewAdapter as ListAdapter).getViewGroup()
             notificationManager = getSystemService(
             Context.NOTIFICATION_SERVICE) as NotificationManager
 
@@ -90,5 +97,35 @@ class MainActivity : Activity() {
             val intent = Intent(this, AddReminder::class.java)
             startActivity(intent)
         }
+
+        deleteButton.setOnClickListener {
+            delete()
+        }
     }
+
+    fun delete() {
+        var numDeletions = 0;
+        var listToRemove = ArrayList<Int>()
+        for (i in 0 until reminders!!.size) {
+            if (recyclerView.getChildAt(i).deleteBox.isChecked) {
+                (recyclerView.getChildViewHolder(recyclerView.getChildAt(i)) as ReminderViewHolder).deleteAlarm()
+                MainFragment.deleteJSON((i+1)-numDeletions,this.applicationContext)
+                //reminders!!.removeAt(i)
+                listToRemove.add(i)
+                //viewAdapter.notifyDataSetChanged()
+                numDeletions++;
+            }
+
+
+        }
+        var numDeletionsTwo = 0;
+        for (j in 0 until listToRemove.size) {
+            reminders!!.removeAt(listToRemove.get(j)-numDeletionsTwo)
+            numDeletionsTwo++;
+        }
+        //reminders!!.removeAll(listToRemove)
+        viewAdapter.notifyDataSetChanged()
+    }
+
+
 }
